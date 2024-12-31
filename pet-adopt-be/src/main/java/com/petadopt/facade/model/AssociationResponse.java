@@ -12,6 +12,6 @@ public class AssociationResponse {
     private Long id;
     private String name;
     private String description;
-    private List<Pet> pets;
+    private List<PetModel> pets;
 
 }

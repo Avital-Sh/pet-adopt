@@ -1,15 +1,11 @@
 package com.petadopt.facade.controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.text.MessageFormat;
 import java.util.List;
-import java.util.Objects;
 
 import com.petadopt.facade.model.ImageUploadResponse;
-import com.petadopt.facade.model.Pet;
-import com.petadopt.persistance.entity.ImageEntity;
-import com.petadopt.persistance.repository.ImagesRepository;
+import com.petadopt.facade.model.PetModel;
+import com.petadopt.service.ImageService;
 import com.petadopt.service.PetService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -29,43 +25,29 @@ import org.springframework.web.multipart.MultipartFile;
 public class PetsController {
 
     private final PetService petService;
-    private final ImagesRepository repository;
+    private final ImageService imageService;
 
-    public PetsController(PetService petService, ImagesRepository repository) {
+    public PetsController(PetService petService, ImageService imageService) {
         this.petService = petService;
-        this.repository = repository;
+        this.imageService = imageService;
     }
 
     @GetMapping
-    public ResponseEntity<List<Pet>> getAllPets() {
+    public ResponseEntity<List<PetModel>> getAllPets() {
         log.info("Fetching all pets.");
         return ResponseEntity.ok(petService.getAllPets());
     }
 
     @PostMapping("/addPet")
-    public void addPet(@RequestBody Pet pet) {
+    public void addPet(@RequestBody PetModel pet) {
         log.info("Adding pet, {}", pet.toString());
         petService.addPet(pet);
     }
 
     @PostMapping("/addPet/uploadImage")
     public ResponseEntity<ImageUploadResponse> uploadImage(@RequestParam("file") MultipartFile file) {
-
-
-        log.info(file.getName());
-        if (file.isEmpty()) {
-            return ResponseEntity.ok(ImageUploadResponse.builder().status("ERROR").build());
-        }
-
         try {
-            String uploadDir = new File("src/main/resources/static/images").getAbsolutePath();
-            ImageEntity imageEntity = repository.save(ImageEntity.builder().build());
-            String suffix = Objects.requireNonNull(file.getOriginalFilename()).split("\\.")[1];
-            File targetFile = new File(MessageFormat.format("{0}/{1}.{2}", uploadDir, imageEntity.getId(), suffix));
-            file.transferTo(targetFile);
-            imageEntity.setImageUrl(MessageFormat.format("{0}/{1}.{2}", "images", imageEntity.getId(), suffix));
-            repository.save(imageEntity);
-            return ResponseEntity.ok(ImageUploadResponse.builder().imageId(imageEntity.getId()).status("OK").build());
+            return ResponseEntity.ok(imageService.uploadImage(file));
         } catch (IOException e) {
             return ResponseEntity.internalServerError().build();
         }

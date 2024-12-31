@@ -22,10 +22,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-
                 .requestMatchers("/user/register", "/user/login", "/images/**", "/pets", "/association/**",
-                    "/messages/**").permitAll() // Public endpoints
+                    "/messages/**", "/applies/apply/**")
+                .permitAll() // Public endpoints
                 .requestMatchers("/pets/addPet/**").hasRole("USER")
+                .requestMatchers("/association/add/**").hasRole("USER")
                 .requestMatchers("/association/add/**").hasRole("USER")
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/**").authenticated()

@@ -2,6 +2,7 @@ package com.petadopt.service;
 
 import java.util.Base64;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import com.petadopt.facade.model.RegistrationRequest;
@@ -43,14 +44,15 @@ public class UserService {
         } else {
             userRole = roleRepository.save(UserRoleEntity.builder().role("USER").build());
         }
-        // Create a new user
         UserEntity user = UserEntity.builder()
             .userRole(userRole)
+            .isActive(false)
+            .firstName(request.getFirstName())
+            .lastName(request.getLastName())
             .userName(request.getUsername())
+            .email(request.getEmail())
             .password(passwordEncoder.encode(request.getPassword()))
             .build();
-
-
         userRepository.save(user);
     }
 
@@ -65,6 +67,11 @@ public class UserService {
         UserEntity foundUser = user.get();
         if (!passwordEncoder.matches(userLoginRequest.getPassword(), foundUser.getPassword())) {
             throw new IllegalArgumentException("Invalid username or password");
+        }
+
+        if (Boolean.FALSE.equals(foundUser.getIsActive()) || foundUser.getIsActive() == null) {
+            throw new IllegalArgumentException("User is in-active, please contact the admin.");
+
         }
 
         // Generate a Base64-encoded token (not recommended for production)
@@ -82,6 +89,23 @@ public class UserService {
             throw new NoResourceFoundException(HttpMethod.GET, "/user/currentUser");
         }
         return UserModel.builder().roles(Collections.singletonList(user.get().getUserRole().getRole()))
-            .email(user.get().getEmail()).username(user.get().getUserName()).build();
+            .email(user.get().getEmail()).username(user.get().getUserName()).firstName(user.get().getFirstName())
+            .lastName(user.get()
+                .getLastName()).build();
+    }
+
+    public List<UserModel> getAllUsers() {
+        List<UserEntity> allUsers = userRepository.findAll();
+        return allUsers.stream().filter(userEntity -> !"ADMIN".equalsIgnoreCase(userEntity.getUserRole().getRole()))
+            .map(userEntity -> UserModel
+                .builder()
+                .id(userEntity.getId())
+                .email(userEntity.getEmail())
+                .firstName(userEntity.getFirstName())
+                .lastName(userEntity.getLastName())
+                .roles(Collections.singletonList(userEntity.getUserRole().getRole()))
+                .username(userEntity.getUserName())
+                .isActive(userEntity.getIsActive())
+                .build()).toList();
     }
 }

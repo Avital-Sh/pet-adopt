@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import com.petadopt.facade.model.AddAssociationRequest;
 import com.petadopt.facade.model.AssociationResponse;
-import com.petadopt.facade.model.Pet;
+import com.petadopt.facade.model.PetModel;
 import com.petadopt.persistance.entity.AssociationEntity;
 import com.petadopt.persistance.entity.UserEntity;
 import com.petadopt.persistance.repository.AssociationRepository;
@@ -43,7 +43,8 @@ public class AssociationService {
         Optional<UserEntity> user = userRepository.findByUserName(userName);
         return user.map(userEntity -> userEntity.getAssociations().stream()
             .map(associationEntity -> AssociationResponse.builder().id(associationEntity.getId()).name(associationEntity.getName())
-                .pets(associationEntity.getPets().stream().map(petEntity -> Pet.builder()
+                .pets(associationEntity.getPets().stream().map(petEntity -> PetModel.builder()
+                    .id(petEntity.getId())
                     .age(petEntity.getAge())
                     .type(petEntity.getType())
                     .imageId(petEntity.getImageEntity().getId())
@@ -56,7 +57,7 @@ public class AssociationService {
     public List<AssociationResponse> getAssociations() {
         return associationRepository.findAll().stream()
             .map(associationEntity -> AssociationResponse.builder().name(associationEntity.getName())
-                .pets(associationEntity.getPets().stream().map(petEntity -> Pet.builder()
+                .pets(associationEntity.getPets().stream().map(petEntity -> PetModel.builder()
                     .age(petEntity.getAge())
                     .type(petEntity.getType())
                     .imageId(petEntity.getImageEntity().getId())
