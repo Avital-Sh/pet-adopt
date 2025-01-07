@@ -43,6 +43,15 @@ public class AdoptionApplyEntity {
     @Column(name = "requestDescription", nullable = false, length = 1000)
     private String requestDescription;
 
+    @Column(name = "occupetion", nullable = false)
+    private String occupetion;
+
+    @Column(name = "personalStatus", nullable = false)
+    private String personalStatus;
+
+    @Column(name = "age", nullable = false)
+    private Integer age;
+
     @Column(name = "requestStatus", nullable = false)
     private String requestStatus;
 
