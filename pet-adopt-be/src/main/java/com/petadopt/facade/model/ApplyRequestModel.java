@@ -16,6 +16,9 @@ public class ApplyRequestModel {
     private String phoneNumber;
     private String requestDescription;
     private String requestStatus;
+    private String occupation;
+    private String personalStatus;
+    private Integer age;
     private LocalDateTime postedTime;
 
 }

@@ -41,6 +41,9 @@ public class ApplyRequestService {
                 .requestDescription(adoptionApplyEntity.getRequestDescription())
                 .petName(adoptionApplyEntity.getPet().getName())
                 .requestStatus(adoptionApplyEntity.getRequestStatus()).id(adoptionApplyEntity.getId())
+                .personalStatus(adoptionApplyEntity.getPersonalStatus())
+                .occupation(adoptionApplyEntity.getOccupetion())
+                .age(adoptionApplyEntity.getAge())
                 .email(adoptionApplyEntity.getEmail()).phoneNumber(adoptionApplyEntity.getPhoneNumber())
                 .postedTime(adoptionApplyEntity.getPostedTime()).fullName(adoptionApplyEntity.getFullName()).build())
             .toList();
@@ -52,6 +55,9 @@ public class ApplyRequestService {
             .fullName(applyRequestModel.getFullName())
             .phoneNumber(applyRequestModel.getPhoneNumber())
             .requestDescription(applyRequestModel.getRequestDescription())
+            .occupetion(applyRequestModel.getOccupation())
+            .personalStatus(applyRequestModel.getPersonalStatus())
+            .age(applyRequestModel.getAge())
             .requestStatus("Pending")
             .build();
         adoptionApplyRepository.save(applyEntity);
