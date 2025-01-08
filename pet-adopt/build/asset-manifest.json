@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e6c13ad2.css",
+    "main.js": "/static/js/main.d611f240.js",
+    "static/js/453.557d673b.chunk.js": "/static/js/453.557d673b.chunk.js",
+    "static/media/loginBackground.png": "/static/media/loginBackground.76c8d78a4d19c6d54e97.png",
+    "static/media/petAdoptionAssociation.png": "/static/media/petAdoptionAssociation.dcd66ebb639298a28bd4.png",
+    "index.html": "/index.html",
+    "main.e6c13ad2.css.map": "/static/css/main.e6c13ad2.css.map",
+    "main.d611f240.js.map": "/static/js/main.d611f240.js.map",
+    "453.557d673b.chunk.js.map": "/static/js/453.557d673b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.d611f240.js"
+  ]
+}
