@@ -56,44 +56,44 @@ const Home = () => {
           <Typography variant="h4" component="h1" gutterBottom>
             Welcome to Pet Haven!
           </Typography>
-          <Typography variant="body1" paragraph>
+          <Typography variant="body1">
             We, <strong>Avital Shafir</strong>, <strong>Linoy Peretz</strong>, and{" "}
             <strong>Ilay Mandil</strong>, are proud to present <strong>PetAdopt</strong>,
             a smart digital platform designed to revolutionize the pet adoption process.
           </Typography>
 
-          <Typography variant="body1" paragraph>
+          <Typography variant="body1">
             As co-founders of PetAdopt and students at{" "}
             <strong>The Academic College of Tel Aviv-Yafo</strong>, we are passionate
             about creating a meaningful impact by connecting adopters with their perfect
             furry companions while supporting animal shelters.
           </Typography>
 
-          <Typography variant="body1" paragraph>
+          <Typography variant="body1">
             Our platform offers:
           </Typography>
 
-          <Typography variant="body1" paragraph>
+          <Typography variant="body1">
             <strong>Personalized Pet Matching:</strong> Find pets that fit your lifestyle
             and preferences.
           </Typography>
 
-          <Typography variant="body1" paragraph>
+          <Typography variant="body1">
             <strong>Community Support:</strong> Share and learn from other adopters
             through our vibrant forum.
           </Typography>
 
-          <Typography variant="body1" paragraph>
+          <Typography variant="body1">
             <strong>Shelter Aid:</strong> Donate securely to help shelters provide for
             animals in need.
           </Typography>
 
-          <Typography variant="body1" paragraph>
+          <Typography variant="body1">
             Join us on this journey to make pet adoption smarter, more accessible, and
             more compassionate.
           </Typography>
 
-          <Typography variant="body1" paragraph>
+          <Typography variant="body1">
             Start your adoption journey with PetAdopt today!
           </Typography>
         </Paper>
