@@ -1,5 +1,41 @@
 import styled from "styled-components";
 
+export const ScrollableContainer = styled.div`
+  height: calc(100vh - 250px);
+  overflow-y: auto;
+  width: 100%;
+  padding: 2rem;
+  box-sizing: border-box;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #5a487c, #a8a4d0);
+    border-radius: 10px;
+    height: 50px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #7a6da8, #d0cbf0);
+  }
+`;
+
+export const ContentContainer = styled.div`
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding-bottom: 2rem;
+`;
+
 export const PostMessageContainer = styled.div`
   display: flex;
   gap: 5px;
